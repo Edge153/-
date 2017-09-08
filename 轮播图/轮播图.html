@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img src="img/g1.jpg" />
+		<button>开始</button>
+		<button>结束</button>
+		<button>上一页</button>
+		<button>下一页</button>
+		<script>
+			var im=document.querySelector("img");
+			var page=1;
+			
+			    var animation=function(){
+				    im.src="img/g"+page+".jpg";
+				      page++
+				      if(page>5){
+					     page=1;
+				      }
+				      }
+			    var timer=setInterval(animation,1000)	
+			  var button=document.querySelectorAll("button");
+			  console.log(button[0])
+			  button[0].addEventListener("click",function(){
+			  	  clearInterval(timer);
+			  	  timer=setInterval(animation,1000)			  	
+			  })
+			  button[1].addEventListener("click",function(){
+			  	 clearInterval(timer);
+			  })
+			  button[2].addEventListener("click",function(){
+			  	 page=page-1;
+			  	 im.src="img/g"+page+".jpg";
+			  })
+			   button[3].addEventListener("click",function(){
+			  	 page=page+1;
+			  	 if(page>5){
+			  	 	page=1;
+			  	 }
+			  	 im.src="img/g"+page+".jpg";
+			  })
+			
+		</script>
+	</body>
+</html>
