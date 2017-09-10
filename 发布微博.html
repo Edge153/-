@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin:0;padding:0;}
+			html,body{width:100%;height:100%;}
+			ul{width:600px;margin:0 auto;}
+			ul li{list-style: none;}
+			#fb{width:60px;display:block;margin:0 auto;}
+			.bg{background:rgba(0,0,0,0.5);position:absolute;left:0;top:0;display: none;}
+			.tc{width: 500px;height:300px;background:#fff;position: absolute;}
+			.tc h4{width:100%;height:40px;background:blue;text-align: center;color:#fff;font:24px/40px "";}
+			.tc h4 i{float: right;margin-right:20px;color:#fff;cursor: pointer;}
+			p{font:14px "";color:#666;margin-left:50px;}
+			.txt{width: 400px;height:180px;border:1px solid #FFA500;margin:0 auto;display: block;}
+			.bt{text-align: center;}
+			.btn{width:100px;height:30px;margin:10px;border:0;border-radius: 5px;}
+			.og{background:#FFA500;}
+		</style>
+	</head>
+	<body>
+		<ul></ul>
+		<button id="fb">发布</button>
+		<div class="bg">
+			 <div class="tc"style="left:300px;top:100px;">
+			 	 <h4>发布微博<i>X</i></h4>
+			 	 <p>请输入您要发表的文字内容</p>
+			 	 <textarea class="txt"></textarea>
+			 	 <div class="bt"><button class="btn og">确定</button><button class="btn">取消</button></div>
+			 </div>			
+		</div>
+		<script>
+			var arr=[
+			      "ajssjdjdjjsj",
+			      "jsijadijjdiad",
+			      "oakdokdkkdkkdk",
+			      "jdjidjijddjdd"
+			]
+			var ul=document.querySelector("ul");
+			var write=function(){ 		
+			for(var i=0;i<arr.length;i++){
+				ul.innerHTML+="<li>"+arr[i]+"</li>";
+			}
+			}
+			write();
+			document.querySelector("#fb").addEventListener("click",function(){
+				var bg=document.querySelector(".bg");
+				bg.style.display="block";
+			    bg.style.width=window.innerWidth+"px";
+			    bg.style.height=window.innerHeight+"px";
+			    var h4=document.querySelector("h4");
+			    var tc=document.querySelector(".tc")
+			    h4.onmousedown=function(e){
+			    	var e=e||event;
+			    	var dix=e.offsetX;
+			    	var diy=e.offsetY;
+			    	document.onmousemove=function(){
+			    		var e=e||event;
+			    		tc.style.left=e.clientX-dix+"px";
+			    		tc.style.top=e.clientY-diy+"px";		    		
+			    	}
+			    	document.onmouseup=function(){
+			    		document.onmousemove=null;
+			    		document.onmouseup=null;
+			    	}			    	
+			    }
+			    var txt=document.querySelector(".txt")
+			    var qd=document.querySelectorAll("button")[1].addEventListener("click",function(){
+			    	arr.push(txt.value);
+			    	ul.innerHTML="";
+			    	write();
+			    	bg.style.display="none";
+			    	txt.value="";
+			    })
+			    var qx=document.querySelectorAll("button")[2].addEventListener("click",function(){
+			    	bg.style.display="none";
+			    	txt.value="";	    	
+			    })
+			    var x=document.querySelector("i");
+			    x.addEventListener("click",function(){
+			    	bg.style.display="none";
+			    	txt.value="";
+			    })
+			    
+			    
+			})
+			
+			
+		</script>
+	</body>
+</html>
