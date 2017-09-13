@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width:100px;
+				height:100px;
+				background:red;
+				position: absolute;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			var oBox=document.getElementById("box");
+			var timer=null;
+			var speedx=0;
+			var speedy=0;
+			function move(){
+				clearInterval(timer);
+			timer=setInterval(function(){
+//				speedx+=2;
+				speedy+=6;
+				var x=oBox.offsetLeft+speedx;
+				var y=oBox.offsetTop+speedy;
+				//console.log(speedx)
+				if(y<0){
+					y=0;
+					speedy*=-1;
+				}else if(y>=document.documentElement.clientHeight-oBox.offsetHeight){
+					y=document.documentElement.clientHeight-oBox.offsetHeight;
+					speedy*=-0.9;
+					speedx*=0.9;
+				}
+				if(x<0){
+					x=0;
+					speedx*=-1;
+				}else if(x>=document.documentElement.clientWidth-oBox.offsetWidth){
+					x=document.documentElement.clientWidth-oBox.offsetWidth;
+					speedx*=-1;
+				
+				}
+				if(Math.abs(speedx)<1){
+					speedx=0;
+				}
+				if(Math.abs(speedy)<1){
+					speedy=0;
+				}
+				if(speedx==0&&speedy==0&& y==document.documentElement.clientHeight-oBox.offsetHeight){
+					clearInterval(timer);
+				}
+				oBox.style.left=x+"px";
+				oBox.style.top=y+"px";			
+			},30)
+		}
+			
+			var boxx=0;
+			var boxy=0;
+			var prex=0;
+			var prey=0;
+			oBox.onmousedown=function(e){
+				var e=e||window.evevt;
+			    boxx=e.offsetX;
+				boxy=e.offsetY;
+				//初始化前一个值，（轨迹）
+				prex=e.clientX;
+				prey=e.clientY;
+				document.onmousemove=function(e){
+					var e=e||window.evevt;
+					var moveLeft=e.clientX-boxx;
+					var moveTop=e.clientY-boxy
+					
+					speedx=e.clientX-prex;
+					speedy=e.clientY-prey;
+					//console.log(speedx)
+					prex=e.clientX;//鼠标位置变成前一个值。
+					prey=e.clientY;
+					//拖拽的球在可视区内
+					if(moveLeft<0){
+						moveLeft=0;
+					}else if(moveLeft>=document.documentElement.clientWidth-oBox.offsetWidth){
+						moveLeft=document.documentElement.clientWidth-oBox.offsetWidth
+					}
+					if(moveTop<0){
+						moveTop=0;
+					}else if(moveTop>=document.documentElement.clientHeight-oBox.offsetHeight){
+						moveTop=document.documentElement.clientHeight-oBox.offsetHeight
+					}
+					//拖拽的时候，球离左边、上边的距离长度
+					oBox.style.left=moveLeft+"px";
+					oBox.style.top=moveTop+"px";
+					
+				
+				}
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+					move();
+				}
+				return false;
+			}
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
