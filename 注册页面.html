@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#form{
+				width:750px;
+				/*height:1000px;*/
+				margin:100px auto;
+				border:1px solid red;
+				position: relative;
+				padding: 30px;
+			}
+			div#row{
+				position: relative;
+				width:100%;
+				margin: 20px 0;
+				
+			}
+			label{
+				display: inline-block;
+				width:150px;
+				text-align: right;
+			}
+			span{
+				color: red;
+			}
+			input{
+				width:300px;
+				height:30px;
+				border:1px solid #f99;
+			}
+			p{
+				width:200px;
+				height:30px;
+				border:1px solid red;
+				font:14px/30px "";
+				float: right;
+				margin-right:20px;
+				display: none;
+			}
+			i{
+				display: inline-block;
+				width: 60px;
+				height:22px;
+				background: #666;
+				text-align: center;
+				color: #fff;
+				
+			}
+			#txt{
+				width:100px;
+				
+			}
+			h4{
+				width:100px;
+				height:30px;
+				/*border:1px solid black;*/
+			   float: right;
+			   font:14px/30px "";
+			   margin:0 10px;
+			}
+			button{
+				width:160px;
+				height:40px;
+				background:#ff9899;
+				border:0;
+				font:18px/40px "";
+				margin-left:200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="form">
+			<div id="row">		
+				<label id="ema"><span>*</span>邮箱：</label>
+				<input id="email" type="text" placeholder="请输入邮箱"/>
+				<b></b>
+				<P id="e">邮箱不能为空</P>			
+			</div>
+			<div id="row">				
+				<label id="paw1"><span>*</span>设置密码：</label>
+				<input id="pas1" type="password" placeholder="6-16位大小写英文字母、数字或符号的组合">
+				<b></b>
+				<P id="pw">密码不能为空</P>			
+			</div>
+			<div class="row">
+					<label>安全级别:</label>					
+					<i>低</i>
+					<i>中</i>
+					<i>高</i>
+			</div>
+			<div id="row">				
+				<label id="paw2"><span>*</span>确认密码：</label>
+				<input id="pas2" type="password" placeholder="请再次输入密码"/>
+				<P id="pw2">密码不一致</P>	
+				<b></b>
+			</div>
+			<div id="row">				
+				<label id="tel"><span>*</span>手机号码：</label>
+				<input id="te" type="number" placeholder="请输入手机号"/>
+				<b></b>
+				<P id="tee">手机号码不能为空</P>			
+			</div>
+			<div id="row">				
+				<label id="yzm"><span>*</span>图形验证码：</label>
+				<input id="txt" type="text"/>
+				<b></b>
+				<P id="yz">图形验证码不能为空</P>	
+				<h4>看不清？<a href="#">换一张</a></h4>
+				<h4></h4>						
+			</div>	
+			<button>同意协议并注册</button>
+		</div>
+		<script>
+			 var bArr= document.getElementsByTagName("b")
+			 
+			    //邮箱
+			    var input=document.querySelectorAll("input");
+			    console.log(input[0])
+			    var oEmeil=document.getElementById("email")
+			    input[0].onblur=function(){			    	
+			    	var par1=/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
+			    	if(par1==""){
+			    	document.getElementById("e").style.display="block";
+				    bArr[0].innerHTML ='x';}		    	
+			    	 if(par1.test(oEmeil.value)){
+				   document.getElementById("e").style.display="none";
+				   bArr[0].innerHTML = '√';
+			     }else{
+				   document.getElementById("e").style.display="block";
+				    bArr[0].innerHTML ='x';
+			     }		    		    	
+			    }			   
+			     //密码
+			     var oPas1=document.getElementById("pas1");
+			      input[1].onblur=function(){		     	
+				  var par2=/^\w{6,16}/;
+				  if(oPas1==""){
+			    	document.getElementById("pw").style.display="block";
+				    bArr[1].innerHTML ='x';
+			    }
+				if(par2.test(oPas1.value)){
+					document.getElementById("pw").style.display="none";
+					bArr[1].innerHTML = '√';
+				}else{
+					document.getElementById("pw").style.display="block";
+					bArr[1].innerHTML = 'x';
+				}
+				//安全级别
+				 var iArr=document.getElementsByTagName("i")
+				 console.log(iArr)
+				 				 
+				if(oPas1.value.length<=10&&oPas1.value.length>0){
+					iArr[0].style.background="red";
+				}
+				else if(oPas1.value.length<=14&&oPas1.value.length>10){
+					iArr[1].style.background="red";
+				}
+				else if(oPas1.value.length>14&&oPas1.value.length<=16){
+					iArr[2].style.background="red";
+				}
+			  }			
+				//确认密码
+				var oPas2=document.getElementById("pas2");
+				input[2].onblur=function(){
+					if(oPas2==""){
+					document.getElementById("pw2").style.display="block";
+					bArr[2].innerHTML = 'K';
+				}
+				if(oPas2.value===oPas1.value&&oPas2.value!==""){
+					document.getElementById("pw2").style.display="none";
+					bArr[2].innerHTML = '√';
+				}else{
+					document.getElementById("pw2").style.display="block";
+					bArr[2].innerHTML = 'x';
+				}					
+				}		
+				//手机号
+				var oTel=document.getElementById("te");
+			     input[3].onblur = function() {
+				    var par3 = /^1[3458][0-9]{9}$/;
+				    if(oTel == "") {
+					    document.getElementById("tee").style.display = "block";
+					    bArr[3].innerHTML = 'x';
+				     }
+				    if(par3.test(oTel.value)) {
+					    document.getElementById("tee").style.display = "none";
+					    bArr[3].innerHTML = '√';
+				    } else {
+					    document.getElementById("tee").style.display = "block";
+					    bArr[3].innerHTML = 'x';
+				   }
+                }
+			   //验证码
+				var oyzm=document.getElementById("txt");
+				input[4].onblur=function(){
+					if(oyzm.value==""){
+					document.getElementById("yz").style.display="none";
+					bArr[4].innerHTML = 'x';
+				}
+				if(oyzm.value===b){
+					document.getElementById("yz").style.display="none";
+					bArr[4].innerHTML = '√';
+				}else{
+					document.getElementById("yz").style.display="block";
+					bArr[4].innerHTML = 'x';
+				}					
+				}
+              //按钮				
+			  document.querySelector("button").addEventListener("click",function(){							
+				if( bArr[0].innerHTML == '√'&& bArr[1].innerHTML == '√'&& bArr[2].innerHTML == '√'&& bArr[3].innerHTML == '√'&&oyzm.value===b){
+					alert("注册成功");
+				}else{
+					alert("填写不正确或有未填项")
+				}
+			})
+			
+			
+			//随机验证码	
+			var b=""
+			var cal=function(){
+				var a=parseInt(Math.random()*43+48);				
+				console.log(a);
+				if(a<65&&a>57){
+					cal();					
+				}else{
+					a=String.fromCharCode(a);
+					console.log(a);
+					b=b+a;
+				}
+				if(b.length<=3){
+					cal()
+				}else{
+					return b;
+				}				
+			}
+			cal()
+			console.log(b)
+			var ob=document.getElementsByTagName("h4")[1];
+			ob.innerHTML=b;
+			document.querySelector("a").addEventListener("click",function(){						
+				b="";
+				cal();
+				ob.innerHTML=b;
+			})
+			
+			
+			
+			
+			
+			
+			
+		</script>
+		
+	</body>
+</html>
