@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text"  id="input1"/>
+		<ul id="ul1">
+			
+		</ul>
+		<script>
+			var input1=document.getElementsByTagName("input")[0];
+			var oul=document.getElementsByTagName("ul")[0];
+			 function taobao(date){
+			 	console.log(date)
+			 	var html="";
+			 	for(var i=0;i<4;i++){
+			 		html+='<li><a href="https://s.taobao.com/search?&initiative_id=tbindexz_20170923&ie=utf8&spm=a21bo.50862.201856-taobao-item.2&sourceId=tb.index&search_type=item&ssid=s5-e&commend=all&imgfile=&q=aape%E5%8D%AB%E8%A1%A3&suggest=0_2&_input_charset=utf-8&wq='+date.result[i]+'&suggest_query=aa&source=suggest">'+date.result[i]+"</a></li>";
+//			 		console.log("html")
+			 		if(tbvalue==""){
+			 			html="";
+			 		}
+			 	}
+			 	
+			 	oul.innerHTML=html;
+			 }
+			 input1.oninput=function(){
+			 	tbvalue=input1.value;
+			 	var csript=document.createElement("script");
+			 	csript.src="https://suggest.taobao.com/sug?code=utf-8&q="+tbvalue+"&_ksTS=1506133183975_1298&callback=taobao&k=1&area=c2c&bucketid=19";
+			 	document.body.appendChild(csript);
+			 	
+			 	
+			 }
+			
+			
+			
+		</script>
+	</body>
+</html>
